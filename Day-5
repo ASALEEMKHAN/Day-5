@@ -1,0 +1,328 @@
+1.Do the below programs in anonymous function & IIFE?
+
+a.Print odd numbers in an array 
+
+Ans:-(Anonymous)
+
+let numbers = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
+
+numbers.filter(function (number) {
+  return number % 2 !== 0;
+}).forEach(function (oddNumber) {
+  console.log(oddNumber);
+});
+
+Ans:-(IIFE)
+
+const numbers = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
+
+(function() {
+  const odds = numbers.filter(function(item) {
+    return item % 2 !== 0;
+  });
+  console.log(odds);
+})();
+
+b.Conveet all the string to tittle caps in a string array 
+
+Ans:-(Anonymous)
+
+const arr = ['hello', 'world', 'how', 'are', 'you'];
+
+
+const titleArr = arr.map(function(str) {
+  return str.split(' ')
+            .map(function(word) {
+              return word.charAt(0).toUpperCase() + word.slice(1);
+            })
+            .join(' ');
+});
+
+console.log(titleArr);
+
+Ans:-(IIFE)
+
+const arr = ['hello', 'world', 'how', 'are', 'you'];
+
+(function() {
+  const titleArr = arr.map(function(item) {
+    return item.charAt(0).toUpperCase() + item.slice(1).toLowerCase();
+  });
+  console.log(titleArr);
+})();
+
+c.Sum of all numbers in an  array 
+
+Ans:-(Anonymous)
+
+const arr = [1, 2, 3, 4, 5];
+
+const sum = arr.reduce(function(total, num) {
+  return total + num;
+}, 0);
+
+console.log(sum);
+
+Ans:-(IIFE)
+
+const arr = [1, 2, 3, 4, 5];
+
+(function() {
+  const sum = arr.reduce(function(total, num) {
+    return total + num;
+  }, 0);
+  console.log(sum);
+})();
+
+
+
+d.Return all the prime numbers in an array 
+
+Ans:-(Anonymous)
+
+const arr = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
+
+const primes = arr.filter(function(num) {
+  if (num < 2) {
+    return false;
+  }
+  for (let i = 2; i <= Math.sqrt(num); i++) {
+    if (num % i === 0) {
+      return false;
+    }
+  }
+  return true;
+});
+
+console.log(primes);
+
+Ans:-(IIFE)
+
+const arr = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
+
+(function() {
+  const primes = arr.filter(function(num) {
+    for(let i = 2; i <= Math.sqrt(num); i++) {
+      if(num % i === 0) {
+        return false;
+      }
+    }
+    return num > 1;
+  });
+  console.log(primes);
+})();
+
+e.Return all the panlindromes in an array 
+
+Ans:-(Anonymous)
+
+const arr = ['racecar', 'level', 'hello', 'madam'];
+
+const palindromes = arr.filter(function(str) {
+  const reversed = str.split('').reverse().join('');
+  return str === reversed;
+});
+
+console.log(palindromes);
+
+Ans:-(IIFE)
+
+const arr = ['racecar', 'level', 'hello', 'madam'];
+
+(function() {
+  const palindromes = arr.filter(function(str) {
+    const reversed = str.split('').reverse().join('');
+    return str === reversed;
+  });
+  console.log(palindromes);
+})();
+
+
+
+f.Return median of two sorted arrays of the same size 
+
+Ans:-(Anonymous)
+
+const arr1 = [1, 3, 5, 7, 9];
+const arr2 = [2, 4, 6, 8, 10];
+
+const median = (arr1, arr2) => {
+  const merged = arr1.concat(arr2).sort((a, b) => a - b);
+  const len = merged.length;
+  const mid = Math.floor(len / 2);
+  return len % 2 === 0 ? (merged[mid - 1] + merged[mid]) / 2 : merged[mid];
+}
+
+console.log(median(arr1, arr2));
+
+Ans:-(IIFE)
+
+const arr1 = [1, 3, 5, 7, 9];
+const arr2 = [2, 4, 6, 8, 10];
+
+(function() {
+  const merged = [...arr1, ...arr2].sort((a, b) => a - b);
+  const mid = Math.floor(merged.length / 2);
+  const median = merged.length % 2 === 0 ? (merged[mid] + merged[mid - 1]) / 2 : merged[mid];
+  console.log(median);
+})();
+
+g.Remove duplicates from an array
+
+Ans:-(Anonymous)
+
+const arr = [1, 2, 2, 3, 3, 3, 4, 5, 5];
+const result = [];
+
+arr.forEach(function(element) {
+  if (!result.includes(element)) {
+    result.push(element);
+  }
+});
+
+console.log(result);
+
+Ans:-(IIFE)
+
+const arr = [1, 2, 2, 3, 3, 3, 4, 5, 5];
+const result = (function() {
+  const unique = [];
+  arr.forEach(function(element) {
+    if (!unique.includes(element)) {
+      unique.push(element);
+    }
+  });
+  return unique;
+})();
+
+console.log(result);
+
+h.Rotate an array by k times
+
+Ans:-(Anonymous)
+
+const arr = [1, 2, 3, 4, 5];
+const k = 2;
+
+const rotatedArr = function(arr, k) {
+  let rotations = k % arr.length;
+  while (rotations > 0) {
+    const element = arr.shift();
+    arr.push(element);
+    rotations--;
+  }
+  return arr;
+}(arr, k);
+
+console.log(rotatedArr);
+
+Ans:-(IIFE)
+
+const arr = [1, 2, 3, 4, 5];
+const k = 3;
+
+const rotatedArr = (function(arr, k) {
+  let rotations = k % arr.length;
+  while (rotations > 0) {
+    const element = arr.shift();
+    arr.push(element);
+    rotations--;
+  }
+  return arr;
+})(arr, k);
+
+console.log(rotatedArr);
+
+
+2.Do the below programs in arrow functions?
+
+a.Print odd numbers in an array 
+
+Ans:-
+
+const arr = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
+
+const oddNumbers = arr.filter(num => num % 2 !== 0);
+
+console.log(oddNumbers);
+
+
+b.Conveet all the string to tittle caps in a string array 
+
+Ans:-
+
+const stringArray = ['hello', 'world', 'how', 'are', 'you'];
+
+const titleCaseArray = stringArray.map(str => str.split(' ')
+                                           .map(word => word.charAt(0).toUpperCase() + word.slice(1))
+                                           .join(' '));
+
+console.log(titleCaseArray);
+
+c.Sum of all numbers in an  array use the arrow function in javascript
+
+Ans:-
+
+const numbers = [1, 2, 3, 4, 5];
+
+const sum = numbers.reduce((total, num) => total + num, 0);
+
+console.log(sum);
+
+d.Return all the prime numbers in an array 
+
+Ans:-
+
+const numbers = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
+
+const isPrime = num => {
+  if (num <= 1) {
+    return false;
+  }
+  for (let i = 2; i <= Math.sqrt(num); i++) {
+    if (num % i === 0) {
+      return false;
+    }
+  }
+  return true;
+};
+
+const primeNumbers = numbers.filter(num => isPrime(num));
+
+console.log(primeNumbers);
+
+
+e.Return all the panlindromes in an array
+
+Ans:-
+
+const words = ['racecar', 'level', 'hello', 'madam'];
+
+const isPalindrome = word => {
+  const reversedWord = word.split('').reverse().join('');
+  return word === reversedWord;
+};
+
+const palindromes = words.filter(word => isPalindrome(word));
+
+console.log(palindromes);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
